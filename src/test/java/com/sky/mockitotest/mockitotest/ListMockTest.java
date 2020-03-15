@@ -60,7 +60,7 @@ public class ListMockTest {
     }
 
     @Test
-    public void arguementCapturing() {
+    public void argumentCapturing() {
         //SUT
         mock.add("test");
 
@@ -69,5 +69,20 @@ public class ListMockTest {
         verify(mock).add(captor.capture());
 
         assertEquals("test", captor.getValue());
+    }
+
+    @Test
+    public void multiArgumentCapturing() {
+        //SUT
+        mock.add("test");
+        mock.add("test2");
+
+        //verify
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mock, times(2)).add(captor.capture());
+
+        List<String> allValues = captor.getAllValues();
+        assertEquals("test", allValues.get(0));
+        assertEquals("test2", allValues.get(1));
     }
 }
