@@ -1,0 +1,39 @@
+package com.sky.mockitotest.mockitotest;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class SomeBusinessServiceImplTest {
+
+    @Test
+    public void calculateSum_basic() {
+        SomeBusinessServiceImpl sb = new SomeBusinessServiceImpl();
+        int actualResult = sb.calculateSum(new int[] {1, 2, 3});
+        int expectedResult =  6;
+
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void calculateSum_empty() {
+        SomeBusinessServiceImpl sb = new SomeBusinessServiceImpl();
+        int actualResult = sb.calculateSum(new int[] {});
+        int expectedResult =  0;
+
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void calculateSum_one() {
+        SomeBusinessServiceImpl sb = new SomeBusinessServiceImpl();
+        int actualResult = sb.calculateSum(new int[] {1});
+        int expectedResult =  1;
+
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+}
