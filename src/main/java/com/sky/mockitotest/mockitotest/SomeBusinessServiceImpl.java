@@ -2,6 +2,10 @@ package com.sky.mockitotest.mockitotest;
 
 import com.sky.mockitotest.mockitotest.data.SomeDataService;
 
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.OptionalInt;
+
 public class SomeBusinessServiceImpl {
 
     private SomeDataService someDataService;
@@ -11,20 +15,10 @@ public class SomeBusinessServiceImpl {
     }
 
     public int calculateSum(int[] inpArr) {
-        int sum = 0;
-
-        for (int value: inpArr)
-            sum += value;
-
-        return sum;
+        return Arrays.stream(inpArr).reduce(Integer::sum).orElse(0);
     }
 
     public int calculateSumUsingDataService() {
-        int sum = 0;
-        int[] data = someDataService.retrievAll();
-        for (int value: data)
-            sum += value;
-
-        return sum;
+        return Arrays.stream(someDataService.retrievAll()).reduce(Integer::sum).orElse(0);
     }
 }
